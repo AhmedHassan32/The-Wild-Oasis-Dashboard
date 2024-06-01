@@ -48,35 +48,18 @@ const variations = {
   `,
 };
 
-// const Button = styled.button`
-//   border: none;
-//   border-radius: var(--border-radius-sm);
-//   box-shadow: var(--shadow-sm);
-
-//   ${(props) => sizes[props.size]}
-//   ${(props) => variations[props.variation]}
-// `;
-
-// Button.defaultProps = {
-//   variation: "primary",
-//   size: "medium",
-// };
-
 const Button = styled.button`
   border: none;
   border-radius: var(--border-radius-sm);
   box-shadow: var(--shadow-sm);
-  ${(props) => sizes[props.$size] + ";"}
-  ${(props) => variations[props.$variation] + ";"}
+
+  ${(props) => sizes[props.size]}
+  ${(props) => variations[props.variation]}
 `;
 
 Button.defaultProps = {
-  $variation: "primary",
-  $size: "medium",
+  variation: "primary",
+  size: "medium",
 };
 
 export default Button;
-
-// So add a "$" sign in front of the custom props in the button declaration and in the default props.
-// Then this error should not occur anymore.
-// Don't  forget to change the properties at the used <Button> elements too.

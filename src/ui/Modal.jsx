@@ -98,3 +98,9 @@ Modal.Open = Open;
 Modal.Window = Window;
 
 export default Modal;
+
+// with react portal we can render the component inside anyplace in the DOM Tree
+// but still leave the component in the same place in the React Component tree so then things like props will work normally
+// two arguments: jsx that we want render,Parent element of what we want to render
+// it allows to create invisible tunnel from the place where the component in inside component tree to another place in DOM Tree
+// overflow property set to hidden in the parent will cause proplems

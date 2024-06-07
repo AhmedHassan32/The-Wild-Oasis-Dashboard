@@ -5,8 +5,8 @@ const StyledFormRow = styled.div`
   align-items: center;
 
   grid-template-columns: ${(props) =>
-    props.orientation === "vertical" ? "1fr" : "24rem 1fr 1.2fr"};
-  gap: ${(props) => (props.orientation === "vertical" ? "0.8rem" : "2.4rem")};
+    props.$orientation === "vertical" ? "1fr" : "24rem 1fr 1.2fr"};
+  gap: ${(props) => (props.$orientation === "vertical" ? "0.8rem" : "2.4rem")};
 
   padding: 1.2rem 0;
 
@@ -20,14 +20,14 @@ const StyledFormRow = styled.div`
 
   &:not(:last-child) {
     border-bottom: ${(props) =>
-      props.orientation === "vertical"
+      props.$orientation === "vertical"
         ? "none"
         : "1px solid var(--color-grey-100)"};
   }
 
   /* Special treatment if the row contains buttons, and if it's NOT a vertical row */
   ${(props) =>
-    props.orientation !== "vertical" &&
+    props.$orientation !== "vertical" &&
     css`
       &:has(button) {
         display: flex;
@@ -48,7 +48,7 @@ const Error = styled.span`
 
 function FormRow({ label, error, children, orientation }) {
   return (
-    <StyledFormRow orientation={orientation}>
+    <StyledFormRow $orientation={orientation}>
       {label && <Label htmlFor={children.props.id}>{label}</Label>}
       {children}
       {error && <Error>{error}</Error>}

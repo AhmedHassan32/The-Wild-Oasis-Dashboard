@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-// import { createPortal } from "react-dom";
+import { createPortal } from "react-dom";
 import { HiEllipsisVertical } from "react-icons/hi2";
 import styled from "styled-components";
 import { useOutsideClick } from "../hooks/useOutsideClick";
@@ -16,7 +16,7 @@ const StyledToggle = styled.button`
   border: none;
   padding: 0.4rem;
   border-radius: var(--border-radius-sm);
-  transform: translateX(-0.8rem);
+  transform: translateX(0.8rem);
   transition: all 0.2s;
 
   &:hover {
@@ -31,7 +31,7 @@ const StyledToggle = styled.button`
 `;
 
 const StyledList = styled.ul`
-  // position: fixed;
+  // position: fixed;  // stop it for bug scroll
   position: absolute; // for bug scroll position
   z-index: 1; // for bug scroll position
 
@@ -39,8 +39,8 @@ const StyledList = styled.ul`
   box-shadow: var(--shadow-md);
   border-radius: var(--border-radius-md);
 
-  right: ${(props) => props.$position.x}px;
-  top: ${(props) => props.$position.y}px;
+  right: ${(props) => props.position.x}px;
+  top: ${(props) => props.position.y}px;
 `;
 
 const StyledButton = styled.button`
@@ -93,6 +93,7 @@ function Toggle({ id }) {
 
   function handleClick(e) {
     e.stopPropagation();
+
     const rect = e.target.closest("button").getBoundingClientRect();
     // setPosition({
     //   x: window.innerWidth - rect.width - rect.x,
@@ -119,16 +120,11 @@ function List({ id, children }) {
 
   if (openId !== id) return null;
 
-  // return createPortal(
-  //   <StyledList position={position} ref={ref}>
-  //     {children}
-  //   </StyledList>,
-  //   document.body,
-  // );
-  return (
-    <StyledList $position={position} ref={ref}>
+  return createPortal(
+    <StyledList position={position} ref={ref}>
       {children}
-    </StyledList>
+    </StyledList>,
+    document.body,
   );
 }
 
